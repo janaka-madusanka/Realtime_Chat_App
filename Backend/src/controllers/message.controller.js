@@ -29,3 +29,32 @@ export const getMessages = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
+export const sendMessages = async (req, res) => {
+    try {
+        const { text, image } = req.body;
+        const { id: receiverId } = req.params;
+        const senderId = req.user._id;
+        let imageUrl;
+        if (image) {
+            //upload image to cloudinary
+            const uploadResponse = await cloudinary.uploader.upload(image);
+            imageUrl = uploadResponse.secure_url;
+        }
+        const newMessage = new Message({
+            senderId,
+            receiverId,
+            text,
+            image: imageUrl,
+        });
+        await newMessage.save();
+
+        //todo:realtime messaging gose hear
+        res.status(201).json(newMessage)
+
+    } catch (error) {
+        console.error("Error in sendMessages:", error.message);
+        res.status(500).json({ error: "Internal server error" });
+
+    }
+};
