@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
-import Message from "../models/user.message.model.js";
+import Message from '../models/message.model.js';
+
 
 export const getUsersForSidebar = async (req, res) => {
     try {
@@ -49,7 +50,7 @@ export const sendMessages = async (req, res) => {
         });
         await newMessage.save();
 
-        //todo:realtime messaging gose hear
+        //todo:realtime messaging goes hear
         res.status(201).json(newMessage)
 
     } catch (error) {
