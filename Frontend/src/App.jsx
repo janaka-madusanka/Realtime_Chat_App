@@ -8,9 +8,11 @@ import LoginPage from './pages/LoginPage'
 import SettingPage from './pages/SettingPage'
 import ProfilePage from './pages/ProfilePage'
 import Navbar from './components/Navbar'
+import { useAuthStore } from './store/useAuthStore'
 
 
 const App = () => {
+  const { authUser } = useAuthStore()
   return (
     <div>
       <Navbar />
