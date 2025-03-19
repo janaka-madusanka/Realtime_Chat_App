@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import axiosInstance from '../axiosInstance.js';
+import { axiosInstance } from '../lib/axios.js';
+
 
 export const useAuthStore = create((set) => ({
     authUser: null,
